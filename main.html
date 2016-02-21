@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
+<!-- 2D ball layout -->
 <div class = "contentHolder">
 	<div id="ball_1"></div>
 	<div id="ball_2"></div>
@@ -13,6 +14,7 @@
 	<div id="ball_4"></div>
 	<div id="ball_5"></div>
 </div>
+
 
 <div class = "contentHolder">
 	<table id="featuresTable">
@@ -28,7 +30,7 @@
 			<tr>
 				<td>Ball 1</td>
 				<td>
-					<select id="BallDropdown_1" onchange="pickEm('BallDropdown_1','ball_1')">
+					<select id="BallDropdown_1" onchange="pickEm('BallDropdown_1','ball_1')" autocomplete="off">
 						<option value="white"> ---Default--- </option>
 						<option value="hsl(310, 40%, 70%)">Purple</option>
 						<option value="hsl(50, 100%, 60%)">Yellow</option>
@@ -41,7 +43,7 @@
 			<tr>
 				<td>Ball 2</td>
 				<td>
-					<select id="BallDropdown_2" onchange="pickEm('BallDropdown_2','ball_2')">
+					<select id="BallDropdown_2" onchange="pickEm('BallDropdown_2','ball_2')" autocomplete="off">
 						<option value="white"> ---Default--- </option>
 						<option value="hsl(310, 40%, 70%)">Purple</option>
 						<option value="hsl(50, 100%, 60%)">Yellow</option>
@@ -54,7 +56,7 @@
 			<tr>
 				<td>Ball 3</td>
 				<td>
-					<select id="BallDropdown_3" onchange="pickEm('BallDropdown_3','ball_3')">
+					<select id="BallDropdown_3" onchange="pickEm('BallDropdown_3','ball_3')" autocomplete="off">
 						<option value="white"> ---Default--- </option>
 						<option value="hsl(310, 40%, 70%)">Purple</option>
 						<option value="hsl(50, 100%, 60%)">Yellow</option>
@@ -67,7 +69,7 @@
 			<tr>
 				<td>Ball 4</td>
 				<td>
-					<select id="BallDropdown_4" onchange="pickEm('BallDropdown_4','ball_4')">
+					<select id="BallDropdown_4" onchange="pickEm('BallDropdown_4','ball_4')" autocomplete="off">
 						<option value="white"> ---Default--- </option>
 						<option value="hsl(310, 40%, 70%)">Purple</option>
 						<option value="hsl(50, 100%, 60%)">Yellow</option>
@@ -80,7 +82,7 @@
 			<tr>
 				<td>Ball 5</td>
 				<td>
-					<select id="BallDropdown_5" onchange="pickEm('BallDropdown_5','ball_5')">
+					<select id="BallDropdown_5" onchange="pickEm('BallDropdown_5','ball_5')" autocomplete="off">
 						<option value="white"> ---Default--- </option>
 						<option value="hsl(310, 40%, 70%)">Purple</option>
 						<option value="hsl(50, 100%, 60%)">Yellow</option>
@@ -95,6 +97,7 @@
 	</table>
 </div>
 
-<script type="text/javascript" src="features.js"></script>
+<script type="text/javascript" src="js/three.min.js"></script>
+<script type="text/javascript" src="js/features.js"></script>
 </body>
 </html>

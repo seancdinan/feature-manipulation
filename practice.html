@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Let's Learn three.js</title>
+	<meta charset=utf-8>
+	<style type="text/css">
+		body {margin: 0;}
+		canvas {width: 100%; height: 100%;}
+	</style>
+</head>
+<body>
+	<script type="text/javascript" src="js/three.min.js"></script>
+	<script type="text/javascript">
+	// Set up the scene, the camera, and the renderer
+		var scene = new THREE.Scene();
+		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		var renderer = new THREE.WebGLRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+	
+	// The render loop will draw the scene at 60fps
+	function render(){
+		requestAnimationFrame(render);
+		renderer.render(scene, camera);
+	}
+
+	var colors = [0xd194c7, 0xffd91a, 0x52e052, 0xbf5540, 0x85e0e0];
+	var pick = colors[Math.round(Math.random() * (colors.length - 1))];
+	
+	var geometry = new THREE.SphereGeometry(1, 20, 20);
+	//var material = new THREE.MeshBasicMaterial({color: pick, wireframe: true});
+	var ball_1 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({color: pick, wireframe: true}));
+	var ball_2 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({color: pick, wireframe: true}));
+	var ball_3 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({color: pick, wireframe: true}));
+	var ball_4 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({color: pick, wireframe: true}));
+	var ball_5 = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({color: pick, wireframe: true}));
+	scene.add(ball_1, ball_2, ball_3, ball_4, ball_5);
+	ball_1.position.x = -2; ball_1.position.z = -4;
+	ball_2.position.x = -1; ball_2.position.z = -2;
+	ball_3.position.x = 0; ball_3.position.z = 0;
+	ball_4.position.x = 1; ball_4.position.z = -2;
+	ball_5.position.x = 2; ball_5.position.z = -4;
+	camera.position.z = 6;
+	
+	render();
+
+
+
+
+	
+	</script>
+</body>
+</html>

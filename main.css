@@ -42,6 +42,18 @@ body {
 	border-radius: 50%;
 }
 
+
+#ballZone {
+	background-color: hsl(175, 20%, 50%);
+	width: 200px;
+	height: 200px;
+	border-left: 1px solid black;
+	margin: 100px;
+	padding: 0px;
+}
+
+
+
 #featuresTable {
 	background-color: hsl(175,40%, 80%);
 	width: 500px;
@@ -68,6 +80,7 @@ td {
 tbody tr:hover {
 	background-color: hsl(175, 40%, 70%)
 }
+
 
 
 

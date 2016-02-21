@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>// 3D Feature Manipulation //</title>
+	<meta charset="UTF-8"> 
+	<link rel="stylesheet" type="text/css" href="main3d.css">
+</head>
+<body>
+<div class = 'interface'>
+
+<canvas id="testCanvas"></canvas>
+<div class = "contentHolder">
+	<table id="featuresTable">
+		
+		<thead>
+			<tr>
+				<th scope="col">Name</th>
+				<th scope="col">Color</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td>Ball 1</td>
+				<td>
+					<select id="BallDropdown_1" onchange = pickEm('BallDropdown_1',ball1) autocomplete="off">
+						<option value="0xffffff"> ---Default--- </option>
+						<option value="0xd194c7">Purple</option>
+						<option value="0xffd91a">Yellow</option>
+						<option value="0x52e052">Green</option>
+						<option value="0xbf5540">Red</option>
+						<option value="0x85e0e0">Blue</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Ball 2</td>
+				<td>
+					<select id="BallDropdown_2" onchange = pickEm('BallDropdown_2',ball2) autocomplete="off">
+						<option value="0xfff"> ---Default--- </option>
+						<option value="0xd194c7">Purple</option>
+						<option value="0xffd91a">Yellow</option>
+						<option value="0x52e052">Green</option>
+						<option value="0xbf5540">Red</option>
+						<option value="0x85e0e0">Blue</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Ball 3</td>
+				<td>
+					<select id="BallDropdown_3" onchange= pickEm('BallDropdown_3',ball3) autocomplete="off">
+						<option value="0xfff"> ---Default--- </option>
+						<option value="0xd194c7">Purple</option>
+						<option value="0xffd91a">Yellow</option>
+						<option value="0x52e052">Green</option>
+						<option value="0xbf5540">Red</option>
+						<option value="0x85e0e0">Blue</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Ball 4</td>
+				<td>
+					<select id="BallDropdown_4" onchange= pickEm('BallDropdown_4',ball4) autocomplete="off">
+						<option value="0xfff"> ---Default--- </option>
+						<option value="0xd194c7">Purple</option>
+						<option value="0xffd91a">Yellow</option>
+						<option value="0x52e052">Green</option>
+						<option value="0xbf5540">Red</option>
+						<option value="0x85e0e0">Blue</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Ball 5</td>
+				<td>
+					<select id="BallDropdown_5" onchange= pickEm('BallDropdown_5',ball5) autocomplete="off">
+						<option value="0xfff"> ---Default--- </option>
+						<option value="0xd194c7">Purple</option>
+						<option value="0xffd91a">Yellow</option>
+						<option value="0x52e052">Green</option>
+						<option value="0xbf5540">Red</option>
+						<option value="0x85e0e0">Blue</option>
+					</select>
+				</td>
+			</tr>
+		</tbody>
+
+	</table>
+</div>
+
+</div>
+
+<script type="text/javascript" src="js/three.min.js"></script>
+<script type="text/javascript" src="js/features3d.js"></script>
+</body>
+</html>
