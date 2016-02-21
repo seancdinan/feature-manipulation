@@ -4,50 +4,40 @@ body {
 
 .contentHolder {
 	background-color: hsl(210, 60%, 40%);
-/*	height: 200px;
-	width: 200px;*/
+	display: flex;
+	justify-content: center;
 	border-radius: 5px;
 	margin: 100px;
 	padding: 20px;
 }
 
 #ball_1 {
-	background-color: white;
-	display: inline-block;
-	margin: auto;
+	margin: auto 25px;
 	height: 200px;
 	width:  200px;
 	border-radius: 50%;
 }
 #ball_2 {
-	background-color: white;
-	display: inline-block;
-	margin: auto;
+	margin: auto 25px;
 	height: 200px;
 	width:  200px;
 	border-radius: 50%;
 }
-/*#ball_3 {
-	background-color: white;
-	display: inline-block;
-	margin: auto;
+#ball_3 {
+	margin: auto 25px;
 	height: 200px;
 	width:  200px;
 	border-radius: 50%;
 }
 #ball_4 {
-	background-color: white;
-	display: inline-block;
-	margin: auto;
+	margin: auto 25px;
 	height: 200px;
 	width:  200px;
 	border-radius: 50%;
 }
 #ball_5 {
-	background-color: white;
-	display: inline-block;
-	margin: auto;
+	margin: auto 25px;
 	height: 200px;
 	width:  200px;
 	border-radius: 50%;
-}*/
+}
