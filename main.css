@@ -1,9 +1,9 @@
 body {
-	background-color: hsl(210, 60%, 25%);
+	background-color: hsl(0, 0%, 20%);
 }
 
 .contentHolder {
-	background-color: hsl(210, 60%, 40%);
+	background-color: hsl(210, 20%, 35%);
 	display: flex;
 	justify-content: center;
 	border-radius: 5px;
@@ -41,3 +41,35 @@ body {
 	width:  200px;
 	border-radius: 50%;
 }
+
+#featuresTable {
+	background-color: hsl(175,40%, 80%);
+	width: 500px;
+	border-radius: 4px;
+	border-collapse: collapse;
+}
+
+th {
+	border-bottom: 1px solid black;
+	padding: 10px;
+	border-left: 1px solid black;
+	font-size: 30px;
+}
+
+td {
+	color: hsl(175, 50%, 10%);
+	font-size: 20px;
+	text-align: center;
+	border-bottom: 1px solid black;
+	border-left: 1px solid black;
+	padding: 10px;
+}
+
+tbody tr:hover {
+	background-color: hsl(175, 40%, 70%)
+}
+
+
+
+
+
