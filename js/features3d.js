@@ -93,7 +93,6 @@ function onDocumentMouseMove(event){
 			camera.position.y -= camY;
 		}
 	}
-
 }
 
 

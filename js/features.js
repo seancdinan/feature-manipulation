@@ -4,11 +4,11 @@ function colorDiv(target, color){
 }
 
 
-// colorDiv('ball_1', 'white')
-// colorDiv('ball_2', 'white')
-// colorDiv('ball_3', 'white')
-// colorDiv('ball_4', 'white')
-// colorDiv('ball_5', 'white')
+colorDiv('ball_1', 'white')
+colorDiv('ball_2', 'white')
+colorDiv('ball_3', 'white')
+colorDiv('ball_4', 'white')
+colorDiv('ball_5', 'white')
 
 function pickEm(whichDropdown, whichBall){
 	var selection = document.getElementById(whichDropdown);
