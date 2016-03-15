@@ -9,7 +9,6 @@ spotlight.position.set(0,2000,2000);
 scene.add(spotlight);	
 
 var renderer = new THREE.WebGLRenderer({precision: 'lowp'});
-console.log(renderer.info);
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setClearColor( 0xeeeeee);
 document.body.appendChild( renderer.domElement );
@@ -42,21 +41,16 @@ loader.load('20160127-095722-FinalHighColorMesh.ply', function(geometry){
 
 	teeth.rotation.x = 3 * Math.PI / 2;
 	teeth.rotation.z = - Math.PI / 2;
-	//teeth.rotation.y = - Math.PI / 8;
 
 	var box = new THREE.Box3().setFromObject(teeth);
 
-
 	scene.add(teeth);
-
 
 })
 
 
 
 // -----------------------------------------------------------
-
-
 // Mouse Control / Rotation
 var mouse = new THREE.Vector2();
 var raycaster, INTERSECTED, intersects, isMouseDown = false, clickCoords = [], teethSelect = false;
@@ -95,6 +89,26 @@ document.addEventListener('mouseup', function(){
 	isMouseDown = false;
 	teethSelect = false;
 }, false);
+
+// Mouse Control / Zoom
+function onDocumentMouseScroll(event){
+	if (event.target.nodeName == 'CANVAS'){
+		console.log(event.deltaY);
+		if (event.deltaY > 0){
+			// zoom out
+			if (camera.position.z < 20)
+				camera.position.z += 0.05;
+		}
+		if (event.deltaY < 0){
+			// zoom in
+			if (camera.position.z > 1){
+				camera.position.z -= 0.05;
+			}
+		}
+	}
+}
+
+document.addEventListener('wheel', onDocumentMouseScroll, false);
 
 // -----------------------------------------------------------
 var render = function () {
