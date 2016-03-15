@@ -16,6 +16,12 @@ document.body.appendChild( renderer.domElement );
 
 
 // -----------------------------------------------------------
+var originBallGeo = new THREE.SphereGeometry(0.15, 10, 10);
+var originMaterial = new THREE.MeshPhongMaterial({color: 0x404040});
+var originBall = new THREE.Mesh(originBallGeo, originMaterial);
+scene.add(originBall);
+
+// -----------------------------------------------------------
 var loader = new THREE.PLYLoader();
 var teeth, pivot, holder;
 loader.load('20160127-095722-FinalHighColorMesh.ply', function(geometry){
@@ -25,17 +31,18 @@ loader.load('20160127-095722-FinalHighColorMesh.ply', function(geometry){
 		color: 0xffffff,
 		vertexColors: THREE.VertexColors,
 		shininess: 30,
-		ambient: 0xededed
+		ambient: 0xededed,
+		side: THREE.DoubleSide
 	});
 
-
 	teeth = new THREE.Mesh(geometry, material);
-	teeth.material.side = THREE.DoubleSide;
 	teeth.name = 'teeth';
 
 	teeth.scale.set(0.05,0.05,0.05);
 
-	//teeth.rotation.x = Math.PI;
+	teeth.rotation.x = 3 * Math.PI / 2;
+	teeth.rotation.z = - Math.PI / 2;
+	//teeth.rotation.y = - Math.PI / 8;
 
 	var box = new THREE.Box3().setFromObject(teeth);
 
@@ -77,7 +84,7 @@ function onDocumentMouseMove(event){
 		distanceMoved[0] = clickCoords[0] - ((event.clientX / window.innerWidth) * 2 - 1);
 		distanceMoved[1] = clickCoords[1] - (- (event.clientY / window.innerHeight) * 2 + 1);
 
-		teeth.rotation.y -= 0.2 * distanceMoved[0];
+		teeth.rotation.z -= 0.2 * distanceMoved[0];
 		teeth.rotation.x += 0.2 * distanceMoved[1];
 	}
 }
