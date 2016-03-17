@@ -1,4 +1,5 @@
 // -----------------------------------------------------------
+// Do the standard scene setup
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 camera.position.z = 5;
@@ -15,12 +16,14 @@ document.body.appendChild( renderer.domElement );
 
 
 // -----------------------------------------------------------
+// Create the ball that gets placed places
 var originBallGeo = new THREE.SphereGeometry(0.15, 10, 10);
 var originMaterial = new THREE.MeshPhongMaterial({color: 0x404040});
 var originBall = new THREE.Mesh(originBallGeo, originMaterial);
 // scene.add(originBall);
 
 // -----------------------------------------------------------
+// Load in the 3D model
 var loader = new THREE.PLYLoader();
 var teeth, pivot, holder;
 loader.load('monkey.ply', function(geometry){
@@ -30,7 +33,6 @@ loader.load('monkey.ply', function(geometry){
 		color: 0xffffff,
 		vertexColors: THREE.VertexColors,
 		shininess: 30,
-		ambient: 0xededed,
 		side: THREE.DoubleSide
 	});
 
@@ -48,6 +50,28 @@ loader.load('monkey.ply', function(geometry){
 
 })
 
+// -----------------------------------------------------------
+// Dropable Options
+var optionMap1 = new THREE.TextureLoader().load('./img/option1.png');
+var optionMap2 = new THREE.TextureLoader().load('./img/option2.png');
+var optionMap3 = new THREE.TextureLoader().load('./img/option3.png');
+optionMap1.minFilter = THREE.LinearFilter 
+optionMap2.minFilter = THREE.LinearFilter 
+optionMap3.minFilter = THREE.LinearFilter 
+
+var material1 = new THREE.SpriteMaterial({map: optionMap1, color: 0xffffff});
+var material2 = new THREE.SpriteMaterial({map: optionMap2, color: 0xffffff});
+var material3 = new THREE.SpriteMaterial({map: optionMap3, color: 0xffffff});
+
+var option1 = new THREE.Sprite(material1);
+var option2 = new THREE.Sprite(material2);
+var option3 = new THREE.Sprite(material3);
+
+option1.position.set(-2, 3, 0);
+option2.position.set(0, 3, 0);
+option3.position.set(2, 3, 0);
+
+scene.add(option1, option2, option3);
 
 // -----------------------------------------------------------
 // Mouse Control / Rotation
