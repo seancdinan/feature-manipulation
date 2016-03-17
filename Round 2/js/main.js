@@ -67,6 +67,10 @@ var option1 = new THREE.Sprite(material1);
 var option2 = new THREE.Sprite(material2);
 var option3 = new THREE.Sprite(material3);
 
+option1.name = 'option1';
+option2.name = 'option2';
+option3.name = 'option3';
+
 option1.position.set(-2, 3, 0);
 option2.position.set(0, 3, 0);
 option3.position.set(2, 3, 0);
@@ -76,10 +80,11 @@ scene.add(option1, option2, option3);
 // -----------------------------------------------------------
 // Mouse Control / Rotation
 var mouse = new THREE.Vector2();
-var raycaster, INTERSECTED, intersects, isMouseDown = false, clickCoords = [], teethSelect = false;
+var raycaster, INTERSECTED, intersects, isMouseDown = false, clickCoords = [], teethSelect = false, newOption, placingOption = false;;
 raycaster = new THREE.Raycaster();
 
 var there = false;
+
 
 function onDocumentMouseDown(event){
 	isMouseDown = true;
@@ -87,7 +92,6 @@ function onDocumentMouseDown(event){
 	clickCoords[1] = mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
 
 	raycaster.setFromCamera(mouse, camera);
-
 	intersect = raycaster.intersectObjects(scene.children);
 
 	if (intersect.length > 0){
@@ -107,6 +111,15 @@ function onDocumentMouseDown(event){
 				there = true;
 			}
 		}
+		if (intersect[0].object.name == 'option1'){
+			var newMaterial = material1.clone();
+			newMaterial.tranparent = true;
+			newMaterial.opacity = 0.5;
+			newOption = new THREE.Sprite(newMaterial);
+			newOption.position.set(option1.position.x, option1.position.y, option1.position.z);
+			placingOption = true;
+			scene.add(newOption);
+		}
 	}
 }
 
@@ -120,22 +133,43 @@ document.addEventListener('keypress', function(event){
 })
 
 function onDocumentMouseMove(event){
-	if (isMouseDown == true && teethSelect == true){
-		var distanceMoved = [];
-		distanceMoved[0] = clickCoords[0] - ((event.clientX / window.innerWidth) * 2 - 1);
-		distanceMoved[1] = clickCoords[1] - (- (event.clientY / window.innerHeight) * 2 + 1);
-
-		teeth.rotation.z -= 0.2 * distanceMoved[0];
-		teeth.rotation.x += 0.2 * distanceMoved[1];
+	if (isMouseDown == true){
+	var distanceMoved = [];
+	distanceMoved[0] = clickCoords[0] - ((event.clientX / window.innerWidth) * 2 - 1);
+	distanceMoved[1] = clickCoords[1] - (- (event.clientY / window.innerHeight) * 2 + 1);
 	}
+	if (isMouseDown == true && teethSelect == true){
+		teeth.rotation.z -= 0.1 * distanceMoved[0];
+		teeth.rotation.x += 0.1 * distanceMoved[1];
+		if (0.1 * distanceMoved[1] > 0.02)
+			teeth.rotation.y -= Math.sign(distanceMoved[1]) * 0.05 * distanceMoved[0];
+	}
+	if (isMouseDown == true && placingOption == true){
+		var delX = getViewerFOV().width;
+		var delY = getViewerFOV().height;
+
+		newOption.position.x += delX * (event.movementX / window.innerWidth);
+		newOption.position.y -= delY * (event.movementY / window.innerHeight);
+		console.log(delX);
+		console.log(event.movementX);
+		console.log(window.innerWidth);
+		console.log(event.movementX / window.innerWidth);
+		console.log('--------------------')
+		
+	}
+}
+
+function onDocumentMouseUp(event){
+	isMouseDown = false;
+	teethSelect = false;
+	raycaster.setFromCamera(mouse, camera);
+	intersect = raycaster.intersectObjects(scene.children);
+	for (var i = 0; i < intersect.length; i++) {console.log(intersect[0].object.name)}; console.log('-----------------')
 }
 
 document.addEventListener('mousedown', onDocumentMouseDown, false);
 document.addEventListener('mousemove', onDocumentMouseMove, false);
-document.addEventListener('mouseup', function(){
-	isMouseDown = false;
-	teethSelect = false;
-}, false);
+document.addEventListener('mouseup', onDocumentMouseUp, false);
 
 // Mouse Control / Zoom
 function onDocumentMouseScroll(event){
@@ -155,6 +189,16 @@ function onDocumentMouseScroll(event){
 }
 
 document.addEventListener('wheel', onDocumentMouseScroll, false);
+// -----------------------------------------------------------
+// Get the field of view
+function getViewerFOV(){
+		var vFOV = camera.fov * Math.PI / 180;
+		var height = 2 * Math.tan(vFOV / 2) * camera.position.z;
+
+		var aspect = window.innerWidth / window.innerHeight;
+		var width = height * aspect;
+		return {'width': width, 'height': height};
+}
 
 // -----------------------------------------------------------
 var render = function () {
