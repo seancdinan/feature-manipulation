@@ -18,12 +18,12 @@ document.body.appendChild( renderer.domElement );
 var originBallGeo = new THREE.SphereGeometry(0.15, 10, 10);
 var originMaterial = new THREE.MeshPhongMaterial({color: 0x404040});
 var originBall = new THREE.Mesh(originBallGeo, originMaterial);
-scene.add(originBall);
+// scene.add(originBall);
 
 // -----------------------------------------------------------
 var loader = new THREE.PLYLoader();
 var teeth, pivot, holder;
-loader.load('20160127-095722-FinalHighColorMesh.ply', function(geometry){
+loader.load('monkey.ply', function(geometry){
 	geometry.computeFaceNormals();
 	geometry.center();
 	var material = new THREE.MeshPhongMaterial({
@@ -37,10 +37,10 @@ loader.load('20160127-095722-FinalHighColorMesh.ply', function(geometry){
 	teeth = new THREE.Mesh(geometry, material);
 	teeth.name = 'teeth';
 
-	teeth.scale.set(0.05,0.05,0.05);
+	teeth.scale.set(1,1,1);
 
-	teeth.rotation.x = 3 * Math.PI / 2;
-	teeth.rotation.z = - Math.PI / 2;
+	//teeth.rotation.x = 3 * Math.PI / 2;
+	//teeth.rotation.z = - Math.PI / 2;
 
 	var box = new THREE.Box3().setFromObject(teeth);
 
@@ -49,12 +49,13 @@ loader.load('20160127-095722-FinalHighColorMesh.ply', function(geometry){
 })
 
 
-
 // -----------------------------------------------------------
 // Mouse Control / Rotation
 var mouse = new THREE.Vector2();
 var raycaster, INTERSECTED, intersects, isMouseDown = false, clickCoords = [], teethSelect = false;
 raycaster = new THREE.Raycaster();
+
+var there = false;
 
 function onDocumentMouseDown(event){
 	isMouseDown = true;
@@ -68,9 +69,31 @@ function onDocumentMouseDown(event){
 	if (intersect.length > 0){
 		if (intersect[0].object.name == 'teeth'){
 			teethSelect = true;
+			if (there == false){
+				var spot = intersect[0].object.worldToLocal(intersect[0].point);
+				console.log('Spot: ', spot);
+				scene.add(originBall);
+				teeth.add(originBall);
+				originBall.position.set(
+					spot.x,
+					spot.y,
+					spot.z);
+				console.log('L --> W ', intersect[0].object.localToWorld(intersect[0].point));
+				console.log('W --> L ', intersect[0].object.worldToLocal(intersect[0].point));
+				there = true;
+			}
 		}
 	}
 }
+
+document.addEventListener('keypress', function(event){
+	if (event.charCode == 32 && there == true){
+		scene.remove(originBall);
+		teeth.remove(originBall);
+		there = false;
+		console.log('------------------------------')
+	}
+})
 
 function onDocumentMouseMove(event){
 	if (isMouseDown == true && teethSelect == true){
@@ -93,7 +116,6 @@ document.addEventListener('mouseup', function(){
 // Mouse Control / Zoom
 function onDocumentMouseScroll(event){
 	if (event.target.nodeName == 'CANVAS'){
-		console.log(event.deltaY);
 		if (event.deltaY > 0){
 			// zoom out
 			if (camera.position.z < 20)
