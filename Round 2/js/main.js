@@ -18,7 +18,7 @@ document.body.appendChild( renderer.domElement );
 // -----------------------------------------------------------
 // Create the ball that gets placed places
 var originBallGeo = new THREE.SphereGeometry(0.15, 10, 10);
-var originMaterial = new THREE.MeshPhongMaterial({color: 0x404040});
+var originMaterial = new THREE.MeshPhongMaterial({color: 0x404040, transparent: true, opacity: 0.5, visible: false});
 var originBall = new THREE.Mesh(originBallGeo, originMaterial);
 // scene.add(originBall);
 
@@ -116,7 +116,9 @@ function onDocumentMouseDown(event){
 			newMaterial.tranparent = true;
 			newMaterial.opacity = 0.5;
 			newOption = new THREE.Sprite(newMaterial);
+			newOption.name = 'newOption';
 			newOption.position.set(option1.position.x, option1.position.y, option1.position.z);
+			newOption.scale.set(0.1, 0.1, 0.1);
 			placingOption = true;
 			scene.add(newOption);
 		}
@@ -158,13 +160,24 @@ function onDocumentMouseMove(event){
 		
 	}
 }
-
+var newOption;
 function onDocumentMouseUp(event){
 	isMouseDown = false;
 	teethSelect = false;
+	placingOption = false;
+	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+	mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
 	raycaster.setFromCamera(mouse, camera);
 	intersect = raycaster.intersectObjects(scene.children);
-	for (var i = 0; i < intersect.length; i++) {console.log(intersect[0].object.name)}; console.log('-----------------')
+	for (var i = 0; i < intersect.length; i++){
+		console.log(intersect[i].object.name)
+		if (intersect[i].object.name == 'teeth' && newOption != undefined){
+			var spot = intersect[i].object.worldToLocal(intersect[0].point);
+			newOption.position.set(originBall.position.x, originBall.position.y, originBall.position.z);
+			console.log(spot);
+			teeth.add(newOption);
+		}
+	}; console.log('-----------------')
 }
 
 document.addEventListener('mousedown', onDocumentMouseDown, false);
